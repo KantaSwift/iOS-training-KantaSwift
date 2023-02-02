@@ -101,9 +101,9 @@
 		2377FD5F298B528700499B5E /* iOS-training-KantaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				2377FD9E298B9F7000499B5E /* Controller */,
 				2377FD60298B528700499B5E /* AppDelegate.swift */,
 				2377FD62298B528700499B5E /* SceneDelegate.swift */,
-				2377FD64298B528700499B5E /* ViewController.swift */,
 				2377FD69298B528800499B5E /* Assets.xcassets */,
 				2377FD6B298B528800499B5E /* LaunchScreen.storyboard */,
 				2377FD6E298B528800499B5E /* Info.plist */,
@@ -126,6 +126,14 @@
 				2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */,
 			);
 			path = "iOS-training-KantaSwiftUITests";
+			sourceTree = "<group>";
+		};
+		2377FD9E298B9F7000499B5E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2377FD64298B528700499B5E /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

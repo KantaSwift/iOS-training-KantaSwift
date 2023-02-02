@@ -7,11 +7,12 @@
 
 import UIKit
 import SnapKit
+import YumemiWeather
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController{
     
     // MARK: - UI
-    private let imageView: UIImageView = {
+    private let wheatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemGray
         return imageView
@@ -33,9 +34,10 @@ final class ViewController: UIViewController {
         return label
     }()
     
-    private let reloadButton: UIButton = {
+    private lazy var reloadButton: UIButton = {
         let button = UIButton()
         button.setTitle("reload", for: .normal)
+        button.addTarget(self, action: #selector(getWeatherData), for: .touchUpInside)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         return button
@@ -63,7 +65,7 @@ final class ViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
-
+    
     // MARK: - LifeCycleMethod
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,29 +77,45 @@ final class ViewController: UIViewController {
 
 private extension ViewController {
     private func setupView() {
-        view.addSubview(imageView)
+        view.addSubview(wheatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
     }
     
     private func setupConstraint() {
-        imageView.snp.makeConstraints {
+        wheatherImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview().dividedBy(2)
-            $0.height.equalTo(imageView.snp.width)
+            $0.height.equalTo(wheatherImageView.snp.width)
         }
         
         labelStackView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom)
-            $0.width.equalTo(imageView.snp.width)
+            $0.top.equalTo(wheatherImageView.snp.bottom)
+            $0.width.equalTo(wheatherImageView.snp.width)
             $0.centerX.equalToSuperview()
         }
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom).offset(80)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(imageView.snp.width)
+            $0.width.equalTo(wheatherImageView.snp.width)
+        }
+    }
+    
+    @objc private func getWeatherData() {
+        let weather = YumemiWeather.fetchWeatherCondition()
+        switch weather {
+        case "sunny":
+            wheatherImageView.image = UIImage(named: "sunny")
+            wheatherImageView.tintColor = .red
+        case "cloudy":
+            wheatherImageView.image = UIImage(named: "cloudy")
+            wheatherImageView.tintColor = .gray
+        case "rainy":
+            wheatherImageView.image = UIImage(named: "rainy")
+            wheatherImageView.tintColor = .blue
+        default:
+            print("error")
         }
     }
 }
-
