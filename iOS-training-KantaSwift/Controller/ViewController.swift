@@ -106,13 +106,13 @@ private extension ViewController {
         let weather = YumemiWeather.fetchWeatherCondition()
         switch weather {
         case "sunny":
-            wheatherImageView.image = UIImage(named: "sunny")
+            wheatherImageView.image = UIImage(named: "sunny")?.withRenderingMode(.alwaysTemplate)
             wheatherImageView.tintColor = .red
         case "cloudy":
-            wheatherImageView.image = UIImage(named: "cloudy")
+            wheatherImageView.image = UIImage(named: "cloudy")?.withRenderingMode(.alwaysTemplate)
             wheatherImageView.tintColor = .gray
         case "rainy":
-            wheatherImageView.image = UIImage(named: "rainy")
+            wheatherImageView.image = UIImage(named: "rainy")?.withRenderingMode(.alwaysTemplate)
             wheatherImageView.tintColor = .blue
         default:
             print("error")

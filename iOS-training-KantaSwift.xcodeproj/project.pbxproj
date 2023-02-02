@@ -17,6 +17,7 @@
 		2377FD84298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */; };
 		2377FD92298B587400499B5E /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD91298B587400499B5E /* YumemiWeather */; };
 		2377FD95298B5CC400499B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD94298B5CC400499B5E /* SnapKit */; };
+		2377FDA0298BA62200499B5E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD9F298BA62200499B5E /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		2377FD7D298B528800499B5E /* iOS-training-KantaSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-training-KantaSwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2377FD81298B528800499B5E /* iOS_training_KantaSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITests.swift; sourceTree = "<group>"; };
 		2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2377FD9F298BA62200499B5E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				2377FD69298B528800499B5E /* Assets.xcassets */,
 				2377FD6B298B528800499B5E /* LaunchScreen.storyboard */,
 				2377FD6E298B528800499B5E /* Info.plist */,
+				2377FD9F298BA62200499B5E /* UIImage.swift */,
 			);
 			path = "iOS-training-KantaSwift";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2377FD65298B528700499B5E /* ViewController.swift in Sources */,
+				2377FDA0298BA62200499B5E /* UIImage.swift in Sources */,
 				2377FD61298B528700499B5E /* AppDelegate.swift in Sources */,
 				2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */,
 			);
