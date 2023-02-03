@@ -93,7 +93,7 @@ private extension ViewController {
         }
         
         imageView.snp.makeConstraints {
-            $0.height.equalTo(centerStackView.snp.width)
+            $0.height.equalTo(imageView.snp.width)
         }
 
         labelStackView.snp.makeConstraints {
