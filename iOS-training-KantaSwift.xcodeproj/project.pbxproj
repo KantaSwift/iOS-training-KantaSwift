@@ -19,6 +19,7 @@
 		2377FD95298B5CC400499B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD94298B5CC400499B5E /* SnapKit */; };
 		2377FDA3298CA07200499B5E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA2298CA07200499B5E /* Weather.swift */; };
 		2377FDA5298CA63E00499B5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA4298CA63E00499B5E /* ViewController.swift */; };
+		2377FDAA298CE68600499B5E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA9298CE68600499B5E /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2377FDA2298CA07200499B5E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2377FDA4298CA63E00499B5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2377FDA9298CE68600499B5E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		2377FD5F298B528700499B5E /* iOS-training-KantaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				2377FDA6298CE55000499B5E /* View */,
 				2377FDA1298CA05000499B5E /* Model */,
 				2377FD9E298B9F7000499B5E /* Controller */,
 				2377FD60298B528700499B5E /* AppDelegate.swift */,
@@ -148,6 +151,14 @@
 				2377FDA2298CA07200499B5E /* Weather.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2377FDA6298CE55000499B5E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2377FDA9298CE68600499B5E /* CustomButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +301,7 @@
 			files = (
 				2377FDA5298CA63E00499B5E /* ViewController.swift in Sources */,
 				2377FDA3298CA07200499B5E /* Weather.swift in Sources */,
+				2377FDAA298CE68600499B5E /* CustomButton.swift in Sources */,
 				2377FD65298B528700499B5E /* WeatherViewController.swift in Sources */,
 				2377FD61298B528700499B5E /* AppDelegate.swift in Sources */,
 				2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */,

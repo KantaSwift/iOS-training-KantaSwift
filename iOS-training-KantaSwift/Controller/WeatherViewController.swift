@@ -34,14 +34,7 @@ final class WeatherViewController: UIViewController{
         return label
     }()
     
-    private lazy var reloadButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("reload", for: .normal)
-        button.addTarget(self, action: #selector(getWeatherData), for: .touchUpInside)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
-        return button
-    }()
+    private let reloadButton = CustomButton(title: "Reload", frame: .zero)
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
@@ -81,6 +74,7 @@ private extension WeatherViewController {
         view.addSubview(wheatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
+        reloadButton.delegate = self
     }
     
     private func setupConstraint() {
@@ -103,13 +97,15 @@ private extension WeatherViewController {
         }
     }
     
-    @objc private func getWeatherData() {
+    @objc private func closeButtonDidTap() {
+        dismiss(animated: true)
+    }
+}
+
+extension WeatherViewController: CustomButtonDelegate {
+    func buttonDidTap(_ button: CustomButton) {
         let weatherString = YumemiWeather.fetchWeatherCondition()
         guard let weather = Weather(rawValue: weatherString) else { return }
         wheatherImageView.image = weather.image
-    }
-    
-    @objc private func closeButtonDidTap() {
-        dismiss(animated: true)
     }
 }
