@@ -14,7 +14,7 @@ final class ViewController: UIViewController{
     // MARK: - UI
     private let wheatherImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemGray
+        imageView.backgroundColor = .systemBackground
         return imageView
     }()
     
