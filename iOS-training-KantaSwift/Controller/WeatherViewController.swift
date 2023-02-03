@@ -43,11 +43,12 @@ final class WeatherViewController: UIViewController{
         return button
     }()
     
-    private let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setTitle("close", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
+        button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -106,5 +107,9 @@ private extension WeatherViewController {
         let weatherString = YumemiWeather.fetchWeatherCondition()
         guard let weather = Weather(rawValue: weatherString) else { return }
         wheatherImageView.image = weather.image
+    }
+    
+    @objc private func closeButtonDidTap() {
+        dismiss(animated: true)
     }
 }
