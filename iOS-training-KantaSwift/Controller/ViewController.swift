@@ -12,7 +12,7 @@ import YumemiWeather
 final class ViewController: UIViewController{
     
     // MARK: - UI
-    private let wheatherImageView: UIImageView = {
+    private let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemBackground
         return imageView
@@ -36,8 +36,8 @@ final class ViewController: UIViewController{
     
     private lazy var reloadButton: UIButton = {
         let button = UIButton()
-        button.setTitle("reload", for: .normal)
         button.addTarget(self, action: #selector(getWeatherData), for: .touchUpInside)
+        button.setTitle("Reload", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         return button
@@ -45,7 +45,7 @@ final class ViewController: UIViewController{
     
     private let closeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("close", for: .normal)
+        button.setTitle("Close", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         return button
@@ -59,8 +59,15 @@ final class ViewController: UIViewController{
         return stackView
     }()
     
+    private lazy var centerStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [weatherImageView, labelStackView])
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [reloadButton, closeButton])
+        let stackView = UIStackView(arrangedSubviews: [closeButton, reloadButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         return stackView
@@ -77,34 +84,34 @@ final class ViewController: UIViewController{
 
 private extension ViewController {
     private func setupView() {
-        view.addSubview(wheatherImageView)
-        view.addSubview(labelStackView)
+        view.addSubview(centerStackView)
         view.addSubview(buttonStackView)
     }
     
     private func setupConstraint() {
-        wheatherImageView.snp.makeConstraints {
+        centerStackView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview().dividedBy(2)
-            $0.height.equalTo(wheatherImageView.snp.width)
         }
         
+        weatherImageView.snp.makeConstraints {
+            $0.height.equalTo(centerStackView.snp.width)
+        }
+
         labelStackView.snp.makeConstraints {
-            $0.top.equalTo(wheatherImageView.snp.bottom)
-            $0.width.equalTo(wheatherImageView.snp.width)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(weatherImageView.snp.bottom)
         }
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom).offset(80)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(wheatherImageView.snp.width)
+            $0.centerX.equalTo(labelStackView.snp.centerX)
+            $0.width.equalTo(weatherImageView.snp.width)
         }
     }
     
     @objc private func getWeatherData() {
         let weatherString = YumemiWeather.fetchWeatherCondition()
         guard let weather = Weather(rawValue: weatherString) else { return }
-        wheatherImageView.image = weather.image
+        weatherImageView.image = weather.image
     }
 }
