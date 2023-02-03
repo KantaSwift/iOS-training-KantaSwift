@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  iOS-training-KantaSwift
 //
 //  Created by 上條 栞汰 on 2023/02/02.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import YumemiWeather
 
-final class ViewController: UIViewController{
+final class WeatherViewController: UIViewController{
     
     // MARK: - UI
     private let wheatherImageView: UIImageView = {
@@ -75,7 +75,7 @@ final class ViewController: UIViewController{
     }
 }
 
-private extension ViewController {
+private extension WeatherViewController {
     private func setupView() {
         view.addSubview(wheatherImageView)
         view.addSubview(labelStackView)
