@@ -67,6 +67,10 @@ final class WeatherViewController: UIViewController{
         setupView()
         setupConstraint()
     }
+    
+    deinit {
+        print("delegate deinit")
+    }
 }
 
 private extension WeatherViewController {
