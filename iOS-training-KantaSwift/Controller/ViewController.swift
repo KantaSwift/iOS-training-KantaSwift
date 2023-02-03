@@ -95,7 +95,7 @@ private extension ViewController {
         }
         
         weatherImageView.snp.makeConstraints {
-            $0.height.equalTo(centerStackView.snp.width)
+            $0.height.equalTo(weatherImageView.snp.width)
         }
 
         labelStackView.snp.makeConstraints {
