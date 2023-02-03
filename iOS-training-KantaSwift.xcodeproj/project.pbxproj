@@ -10,13 +10,13 @@
 		2377FD61298B528700499B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD60298B528700499B5E /* AppDelegate.swift */; };
 		2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD62298B528700499B5E /* SceneDelegate.swift */; };
 		2377FD65298B528700499B5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD64298B528700499B5E /* ViewController.swift */; };
-		2377FD68298B528700499B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2377FD66298B528700499B5E /* Main.storyboard */; };
 		2377FD6A298B528800499B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2377FD69298B528800499B5E /* Assets.xcassets */; };
 		2377FD6D298B528800499B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2377FD6B298B528800499B5E /* LaunchScreen.storyboard */; };
 		2377FD78298B528800499B5E /* iOS_training_KantaSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD77298B528800499B5E /* iOS_training_KantaSwiftTests.swift */; };
 		2377FD82298B528800499B5E /* iOS_training_KantaSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD81298B528800499B5E /* iOS_training_KantaSwiftUITests.swift */; };
 		2377FD84298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */; };
 		2377FD92298B587400499B5E /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD91298B587400499B5E /* YumemiWeather */; };
+		2377FD95298B5CC400499B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD94298B5CC400499B5E /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,6 @@
 		2377FD60298B528700499B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2377FD62298B528700499B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2377FD64298B528700499B5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2377FD67298B528700499B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2377FD69298B528800499B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2377FD6C298B528800499B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2377FD6E298B528800499B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2377FD92298B587400499B5E /* YumemiWeather in Frameworks */,
+				2377FD95298B5CC400499B5E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +104,6 @@
 				2377FD60298B528700499B5E /* AppDelegate.swift */,
 				2377FD62298B528700499B5E /* SceneDelegate.swift */,
 				2377FD64298B528700499B5E /* ViewController.swift */,
-				2377FD66298B528700499B5E /* Main.storyboard */,
 				2377FD69298B528800499B5E /* Assets.xcassets */,
 				2377FD6B298B528800499B5E /* LaunchScreen.storyboard */,
 				2377FD6E298B528800499B5E /* Info.plist */,
@@ -147,6 +146,7 @@
 			name = "iOS-training-KantaSwift";
 			packageProductDependencies = (
 				2377FD91298B587400499B5E /* YumemiWeather */,
+				2377FD94298B5CC400499B5E /* SnapKit */,
 			);
 			productName = "iOS-training-KantaSwift";
 			productReference = 2377FD5D298B528700499B5E /* iOS-training-KantaSwift.app */;
@@ -222,6 +222,7 @@
 			mainGroup = 2377FD54298B528700499B5E;
 			packageReferences = (
 				2377FD90298B587400499B5E /* XCRemoteSwiftPackageReference "ios-training" */,
+				2377FD93298B5CC400499B5E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 2377FD5E298B528700499B5E /* Products */;
 			projectDirPath = "";
@@ -241,7 +242,6 @@
 			files = (
 				2377FD6D298B528800499B5E /* LaunchScreen.storyboard in Resources */,
 				2377FD6A298B528800499B5E /* Assets.xcassets in Resources */,
-				2377FD68298B528700499B5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,14 +305,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2377FD66298B528700499B5E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2377FD67298B528700499B5E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2377FD6B298B528800499B5E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -449,7 +441,6 @@
 				INFOPLIST_FILE = "iOS-training-KantaSwift/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -476,7 +467,6 @@
 				INFOPLIST_FILE = "iOS-training-KantaSwift/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -614,6 +604,14 @@
 				kind = branch;
 			};
 		};
+		2377FD93298B5CC400499B5E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -621,6 +619,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2377FD90298B587400499B5E /* XCRemoteSwiftPackageReference "ios-training" */;
 			productName = YumemiWeather;
+		};
+		2377FD94298B5CC400499B5E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2377FD93298B5CC400499B5E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
