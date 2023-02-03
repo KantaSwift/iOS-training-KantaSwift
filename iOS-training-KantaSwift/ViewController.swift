@@ -82,8 +82,6 @@ final class ViewController: UIViewController {
 
 private extension ViewController {
     private func setupView() {
-//        view.addSubview(imageView)
-//        view.addSubview(labelStackView)
         view.addSubview(centerStackView)
         view.addSubview(buttonStackView)
     }
