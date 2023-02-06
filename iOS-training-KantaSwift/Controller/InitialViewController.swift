@@ -1,14 +1,13 @@
 //
-//  ViewController.swift
+//  InitialViewController.swift
 //  iOS-training-KantaSwift
 //
 //  Created by 上條 栞汰 on 2023/02/03.
 //
 
-import Foundation
 import UIKit
 
-final class ViewController: UIViewController {
+final class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
