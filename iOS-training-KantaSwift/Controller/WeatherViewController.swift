@@ -12,13 +12,13 @@ import YumemiWeather
 final class WeatherViewController: UIViewController{
     
     // MARK: - UI
-    private let wheatherImageView: UIImageView = {
+    private let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemBackground
         return imageView
     }()
     
-    private let blueLabel: UILabel = {
+    private let leftLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
         label.text = "--"
@@ -26,7 +26,7 @@ final class WeatherViewController: UIViewController{
         return label
     }()
     
-    private let redLabel: UILabel = {
+    private let rightLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
         label.text = "--"
@@ -36,18 +36,15 @@ final class WeatherViewController: UIViewController{
     
     private let reloadButton = CustomButton(title: "Reload", frame: .zero)
     
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("close", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
+    private lazy var closeButton: CustomButton = {
+        let button = CustomButton(title: "Close", frame: .zero)
         button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         return button
     }()
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [blueLabel, redLabel])
+        let stackView = UIStackView(arrangedSubviews: [leftLabel, rightLabel])
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
         return stackView
@@ -74,34 +71,40 @@ final class WeatherViewController: UIViewController{
 }
 
 private extension WeatherViewController {
-    private func setupView() {
-        view.addSubview(wheatherImageView)
+    func setupView() {
+        view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
         reloadButton.delegate = self
     }
     
-    private func setupConstraint() {
-        wheatherImageView.snp.makeConstraints {
+    func setupConstraint() {
+        weatherImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview().dividedBy(2)
-            $0.height.equalTo(wheatherImageView.snp.width)
+            $0.height.equalTo(weatherImageView.snp.width)
         }
         
         labelStackView.snp.makeConstraints {
-            $0.top.equalTo(wheatherImageView.snp.bottom)
-            $0.width.equalTo(wheatherImageView.snp.width)
+            $0.top.equalTo(weatherImageView.snp.bottom)
+            $0.width.equalTo(weatherImageView.snp.width)
             $0.centerX.equalToSuperview()
         }
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom).offset(80)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(wheatherImageView.snp.width)
+            $0.width.equalTo(weatherImageView.snp.width)
         }
     }
     
-    @objc private func closeButtonDidTap() {
+    @objc func getWeatherData() {
+        let weatherString = YumemiWeather.fetchWeatherCondition()
+        guard let weather = Weather(rawValue: weatherString) else { return }
+        weatherImageView.image = weather.image
+    }
+    
+    @objc func closeButtonDidTap() {
         dismiss(animated: true)
     }
 }
@@ -110,6 +113,6 @@ extension WeatherViewController: CustomButtonDelegate {
     func buttonDidTap(_ button: CustomButton) {
         let weatherString = YumemiWeather.fetchWeatherCondition()
         guard let weather = Weather(rawValue: weatherString) else { return }
-        wheatherImageView.image = weather.image
+        weatherImageView.image = weather.image
     }
 }

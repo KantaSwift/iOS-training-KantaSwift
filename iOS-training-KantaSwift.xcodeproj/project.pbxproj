@@ -18,8 +18,9 @@
 		2377FD92298B587400499B5E /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD91298B587400499B5E /* YumemiWeather */; };
 		2377FD95298B5CC400499B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD94298B5CC400499B5E /* SnapKit */; };
 		2377FDA3298CA07200499B5E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA2298CA07200499B5E /* Weather.swift */; };
-		2377FDA5298CA63E00499B5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA4298CA63E00499B5E /* ViewController.swift */; };
-		2377FDAA298CE68600499B5E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA9298CE68600499B5E /* CustomButton.swift */; };
+
+		2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA4298CA63E00499B5E /* InitialViewController.swift */; };
+		2377FDAF299096D200499B5E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDAE299096D200499B5E /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +54,8 @@
 		2377FD81298B528800499B5E /* iOS_training_KantaSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITests.swift; sourceTree = "<group>"; };
 		2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2377FDA2298CA07200499B5E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		2377FDA4298CA63E00499B5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2377FDA9298CE68600499B5E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		2377FDA4298CA63E00499B5E /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		2377FDAE299096D200499B5E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +108,7 @@
 		2377FD5F298B528700499B5E /* iOS-training-KantaSwift */ = {
 			isa = PBXGroup;
 			children = (
-				2377FDA6298CE55000499B5E /* View */,
+				2377FDAD299096B800499B5E /* View */,
 				2377FDA1298CA05000499B5E /* Model */,
 				2377FD9E298B9F7000499B5E /* Controller */,
 				2377FD60298B528700499B5E /* AppDelegate.swift */,
@@ -140,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				2377FD64298B528700499B5E /* WeatherViewController.swift */,
-				2377FDA4298CA63E00499B5E /* ViewController.swift */,
+				2377FDA4298CA63E00499B5E /* InitialViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -153,10 +154,10 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2377FDA6298CE55000499B5E /* View */ = {
+		2377FDAD299096B800499B5E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2377FDA9298CE68600499B5E /* CustomButton.swift */,
+				2377FDAE299096D200499B5E /* CustomButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,9 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2377FDA5298CA63E00499B5E /* ViewController.swift in Sources */,
+				2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */,
 				2377FDA3298CA07200499B5E /* Weather.swift in Sources */,
-				2377FDAA298CE68600499B5E /* CustomButton.swift in Sources */,
+				2377FDAF299096D200499B5E /* CustomButton.swift in Sources */,
 				2377FD65298B528700499B5E /* WeatherViewController.swift in Sources */,
 				2377FD61298B528700499B5E /* AppDelegate.swift in Sources */,
 				2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */,
