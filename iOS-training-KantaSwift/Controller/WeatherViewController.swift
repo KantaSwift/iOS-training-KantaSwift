@@ -36,8 +36,17 @@ final class WeatherViewController: UIViewController{
         return label
     }()
     
-    private let reloadButton = CustomButton(title: "Reload", frame: .zero)
-    private let closeButton = CustomButton(title: "Close", frame: .zero)
+    private lazy var reloadButton: CustomButton = {
+        let button = CustomButton(title: "Reload", frame: .zero)
+        button.addTarget(self, action: #selector(reloadButtonDidTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var closeButton: CustomButton = {
+        let button = CustomButton(title: "Close", frame: .zero)
+        button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
@@ -72,10 +81,6 @@ private extension WeatherViewController {
         view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
-        for (index, button) in [reloadButton, closeButton].enumerated() {
-            button.delegate = self
-            button.tag = index
-        }
         weatherDataManager.delegate = self
     }
     
@@ -98,21 +103,17 @@ private extension WeatherViewController {
             $0.width.equalTo(weatherImageView.snp.width)
         }
     }
+    
+    @objc func reloadButtonDidTap() {
+        weatherDataManager.requestWeather()
+    }
+    
+    @objc func closeButtonDidTap() {
+        dismiss(animated: true)
+    }
 }
 
     // MARK: - DelegateMethods
-extension WeatherViewController: CustomButtonDelegate {
-    func buttonDidTap(_ button: CustomButton, didTapAtIndex: Int) {
-        switch didTapAtIndex {
-        case 0:
-            weatherDataManager.requestWeather()
-        case 1:
-            dismiss(animated: true)
-        default:
-            print("error")
-        }
-    }
-}
 
 extension WeatherViewController: WeatherDelegate {
     func weatherDidUpdate(weather: String) {
