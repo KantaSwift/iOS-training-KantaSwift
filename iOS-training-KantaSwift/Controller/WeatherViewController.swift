@@ -111,6 +111,12 @@ private extension WeatherViewController {
     @objc func closeButtonDidTap() {
         dismiss(animated: true)
     }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
 
