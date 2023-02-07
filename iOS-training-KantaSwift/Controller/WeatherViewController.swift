@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  iOS-training-KantaSwift
 //
 //  Created by 上條 栞汰 on 2023/02/02.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import YumemiWeather
 
-final class ViewController: UIViewController{
+final class WeatherViewController: UIViewController{
     
     // MARK: - UI
     private let weatherImageView: UIImageView = {
@@ -18,7 +18,7 @@ final class ViewController: UIViewController{
         return imageView
     }()
     
-    private let blueLabel: UILabel = {
+    private let leftLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
         label.text = "--"
@@ -26,7 +26,7 @@ final class ViewController: UIViewController{
         return label
     }()
     
-    private let redLabel: UILabel = {
+    private let rightLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
         label.text = "--"
@@ -34,40 +34,28 @@ final class ViewController: UIViewController{
         return label
     }()
     
-    private lazy var reloadButton: UIButton = {
-        let button = UIButton()
+    private lazy var reloadButton: CustomButton = {
+        let button = CustomButton(title: "reload")
         button.addTarget(self, action: #selector(getWeatherData), for: .touchUpInside)
-        button.setTitle("Reload", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         return button
     }()
     
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Close", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
+    private lazy var closeButton: CustomButton = {
+        let button = CustomButton(title: "close")
+        button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         return button
     }()
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [blueLabel, redLabel])
+        let stackView = UIStackView(arrangedSubviews: [leftLabel, rightLabel])
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
         return stackView
     }()
     
-    private lazy var centerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [weatherImageView, labelStackView])
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        return stackView
-    }()
-    
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [closeButton, reloadButton])
+        let stackView = UIStackView(arrangedSubviews: [reloadButton, closeButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         return stackView
@@ -82,36 +70,40 @@ final class ViewController: UIViewController{
     }
 }
 
-private extension ViewController {
-    private func setupView() {
-        view.addSubview(centerStackView)
+private extension WeatherViewController {
+    func setupView() {
+        view.addSubview(weatherImageView)
+        view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
     }
     
-    private func setupConstraint() {
-        centerStackView.snp.makeConstraints {
+    func setupConstraint() {
+        weatherImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview().dividedBy(2)
-        }
-        
-        weatherImageView.snp.makeConstraints {
             $0.height.equalTo(weatherImageView.snp.width)
         }
-
+        
         labelStackView.snp.makeConstraints {
             $0.top.equalTo(weatherImageView.snp.bottom)
+            $0.width.equalTo(weatherImageView.snp.width)
+            $0.centerX.equalToSuperview()
         }
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom).offset(80)
-            $0.centerX.equalTo(labelStackView.snp.centerX)
+            $0.centerX.equalToSuperview()
             $0.width.equalTo(weatherImageView.snp.width)
         }
     }
     
-    @objc private func getWeatherData() {
+    @objc func getWeatherData() {
         let weatherString = YumemiWeather.fetchWeatherCondition()
         guard let weather = Weather(rawValue: weatherString) else { return }
         weatherImageView.image = weather.image
+    }
+    
+    @objc func closeButtonDidTap() {
+        dismiss(animated: true)
     }
 }
