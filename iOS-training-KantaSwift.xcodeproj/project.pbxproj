@@ -20,7 +20,7 @@
 		2377FDA3298CA07200499B5E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA2298CA07200499B5E /* Weather.swift */; };
 		2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA4298CA63E00499B5E /* InitialViewController.swift */; };
 		2377FDAF299096D200499B5E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDAE299096D200499B5E /* CustomButton.swift */; };
-		239E54042990EE0A00408BF7 /* WeatherDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E54032990EE0A00408BF7 /* WeatherDataManager.swift */; };
+		239E54042990EE0A00408BF7 /* WeatherAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		2377FDA2298CA07200499B5E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2377FDA4298CA63E00499B5E /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		2377FDAE299096D200499B5E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		239E54032990EE0A00408BF7 /* WeatherDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataManager.swift; sourceTree = "<group>"; };
+		239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,7 @@
 		239E54052990F9C700408BF7 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				239E54032990EE0A00408BF7 /* WeatherDataManager.swift */,
+				239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -311,7 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */,
-				239E54042990EE0A00408BF7 /* WeatherDataManager.swift in Sources */,
+				239E54042990EE0A00408BF7 /* WeatherAPIClient.swift in Sources */,
 				2377FDA3298CA07200499B5E /* Weather.swift in Sources */,
 				2377FDAF299096D200499B5E /* CustomButton.swift in Sources */,
 				2377FD65298B528700499B5E /* WeatherViewController.swift in Sources */,

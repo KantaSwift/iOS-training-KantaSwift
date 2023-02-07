@@ -1,5 +1,5 @@
 //
-//  WeatherDataManager.swift
+//  WeatherAPIClient.swift
 //  iOS-training-KantaSwift
 //
 //  Created by 上條 栞汰 on 2023/02/06.
@@ -12,7 +12,7 @@ protocol WeatherDelegate: AnyObject {
     func weatherDidUpdate(weather: String)
 }
 
-final class WeatherDataManager {
+final class WeatherAPIClient {
     
     weak var delegate: WeatherDelegate?
 
