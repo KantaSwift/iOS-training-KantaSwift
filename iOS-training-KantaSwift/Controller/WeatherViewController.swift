@@ -11,6 +11,8 @@ import YumemiWeather
 
 final class WeatherViewController: UIViewController{
     
+    private let weatherDataManager = WeatherDataManager()
+    
     // MARK: - UI
     private let weatherImageView: UIImageView = {
         let imageView = UIImageView()
@@ -35,12 +37,7 @@ final class WeatherViewController: UIViewController{
     }()
     
     private let reloadButton = CustomButton(title: "Reload", frame: .zero)
-    
-    private lazy var closeButton: CustomButton = {
-        let button = CustomButton(title: "Close", frame: .zero)
-        button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
-        return button
-    }()
+    private let closeButton = CustomButton(title: "Close", frame: .zero)
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
@@ -75,7 +72,11 @@ private extension WeatherViewController {
         view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
-        reloadButton.delegate = self
+        for (index, button) in [reloadButton, closeButton].enumerated() {
+            button.delegate = self
+            button.tag = index
+        }
+        weatherDataManager.delegate = self
     }
     
     func setupConstraint() {
@@ -97,22 +98,25 @@ private extension WeatherViewController {
             $0.width.equalTo(weatherImageView.snp.width)
         }
     }
-    
-    @objc func getWeatherData() {
-        let weatherString = YumemiWeather.fetchWeatherCondition()
-        guard let weather = Weather(rawValue: weatherString) else { return }
-        weatherImageView.image = weather.image
-    }
-    
-    @objc func closeButtonDidTap() {
-        dismiss(animated: true)
+}
+
+    // MARK: - DelegateMethods
+extension WeatherViewController: CustomButtonDelegate {
+    func buttonDidTap(_ button: CustomButton, didTapAtIndex: Int) {
+        switch didTapAtIndex {
+        case 0:
+            weatherDataManager.requestWeather()
+        case 1:
+            dismiss(animated: true)
+        default:
+            print("error")
+        }
     }
 }
 
-extension WeatherViewController: CustomButtonDelegate {
-    func buttonDidTap(_ button: CustomButton) {
-        let weatherString = YumemiWeather.fetchWeatherCondition()
-        guard let weather = Weather(rawValue: weatherString) else { return }
+extension WeatherViewController: WeatherDelegate {
+    func weatherDidUpdate(weather: String) {
+        guard let weather = Weather(rawValue: weather) else { return }
         weatherImageView.image = weather.image
     }
 }
