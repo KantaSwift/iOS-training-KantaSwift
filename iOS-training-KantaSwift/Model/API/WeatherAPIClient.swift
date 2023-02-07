@@ -5,7 +5,6 @@
 //  Created by 上條 栞汰 on 2023/02/06.
 //
 
-import UIKit
 import YumemiWeather
 
 protocol WeatherDelegate: AnyObject {
