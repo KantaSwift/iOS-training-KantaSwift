@@ -112,7 +112,7 @@ private extension WeatherViewController {
         dismiss(animated: true)
     }
     
-    private func showAlert(message: String) {
+    private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
@@ -125,9 +125,9 @@ extension WeatherViewController: WeatherAPIClientDelegate {
     func weatherDidFail(error: YumemiWeatherError) {
         switch error {
         case .unknownError:
-            showAlert(message: "unknownError")
+            showErrorAlert(message: "unknownError")
         case .invalidParameterError:
-            showAlert(message: "invalidParameterError")
+            showErrorAlert(message: "invalidParameterError")
         }
     }
     
