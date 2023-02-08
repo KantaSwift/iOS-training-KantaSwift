@@ -21,10 +21,8 @@ final class WeatherAPIClient {
         do {
             let weatherString = try YumemiWeather.fetchWeatherCondition(at: "tokyo")
             delegate?.didUpdateWeather(weatherString)
-        } catch YumemiWeatherError.invalidParameterError {
-            delegate?.weatherDidFail(error: .invalidParameterError)
-        } catch YumemiWeatherError.unknownError {
-            delegate?.weatherDidFail(error: .unknownError)
+        } catch let error as YumemiWeatherError {
+            delegate?.weatherDidFail(error: error)
         } catch {
             print("someError")
         }
