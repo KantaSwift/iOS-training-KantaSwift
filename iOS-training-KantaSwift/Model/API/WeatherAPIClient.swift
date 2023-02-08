@@ -8,7 +8,7 @@
 import YumemiWeather
 
 protocol WeatherDelegate: AnyObject {
-    func weatherDidUpdate(weather: String)
+    func didUpdateWeather(_ weather: String)
 }
 
 final class WeatherAPIClient {
