@@ -7,7 +7,7 @@
 
 import YumemiWeather
 
-protocol WeatherDelegate: AnyObject {
+protocol WeatherAPIClientDelegate: AnyObject {
     func didUpdateWeather(_ weather: String)
 }
 
