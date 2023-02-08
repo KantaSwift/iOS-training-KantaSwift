@@ -23,8 +23,6 @@ final class WeatherAPIClient {
             delegate?.didUpdateWeather(weatherString)
         } catch let error as YumemiWeatherError {
             delegate?.weatherDidFail(error: error)
-        } catch {
-            print("someError")
-        }
+        } catch {}
     }
 }
