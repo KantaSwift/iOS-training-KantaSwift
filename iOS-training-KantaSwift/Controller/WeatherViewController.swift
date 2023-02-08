@@ -11,7 +11,7 @@ import YumemiWeather
 
 final class WeatherViewController: UIViewController{
     
-    private let weatherDataManager = WeatherAPIClient()
+    private let weatherAPIClient = WeatherAPIClient()
     
     // MARK: - UI
     private let weatherImageView: UIImageView = {
