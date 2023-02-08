@@ -71,6 +71,7 @@ final class WeatherViewController: UIViewController{
         view.backgroundColor = .systemBackground
         setupView()
         setupConstraint()
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     deinit {
@@ -118,6 +119,10 @@ private extension WeatherViewController {
         let alert = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    @objc func  didBecomeActive() {
+        weatherAPIClient.requestWeather()
     }
 }
 
