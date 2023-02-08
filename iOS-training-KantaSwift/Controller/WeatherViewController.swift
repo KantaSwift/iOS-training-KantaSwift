@@ -20,7 +20,7 @@ final class WeatherViewController: UIViewController{
         return imageView
     }()
     
-    private let leftLabel: UILabel = {
+    private let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
         label.font = .systemFont(ofSize: 30, weight: .light)
@@ -29,7 +29,7 @@ final class WeatherViewController: UIViewController{
         return label
     }()
     
-    private let rightLabel: UILabel = {
+    private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
         label.font = .systemFont(ofSize: 30, weight: .light)
@@ -52,7 +52,7 @@ final class WeatherViewController: UIViewController{
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [leftLabel, rightLabel])
+        let stackView = UIStackView(arrangedSubviews: [minTemperatureLabel, maxTemperatureLabel])
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
         return stackView
@@ -135,8 +135,8 @@ extension WeatherViewController: WeatherAPIClientDelegate {
     func didUpdateWeather(_ weather: WeatherData) {
         guard let weatherCondition = WeatherCondition(rawValue: weather.weatherCondition) else { return }
         weatherImageView.image = weatherCondition.image
-        leftLabel.text = String(weather.minTemperature)
-        rightLabel.text = String(weather.maxTemperature)
+        minTemperatureLabel.text = String(weather.minTemperature)
+        maxTemperatureLabel.text = String(weather.maxTemperature)
     }
 }
 
