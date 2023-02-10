@@ -34,6 +34,7 @@ final class WeatherAPIClient {
             guard let parameter = String(data: data, encoding: .utf8) else { return }
             let jsonString = try YumemiWeather.fetchWeather(parameter)
             guard let data = jsonString.data(using: .utf8) else { return }
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let weather = try decoder.decode(WeatherData.self, from: data)
             delegate?.didUpdateWeather(weather)
         } catch let error as APIClientError {
