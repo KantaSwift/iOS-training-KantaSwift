@@ -122,7 +122,7 @@ private extension WeatherViewController {
 
     // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
-    func didFailGetWeather(error: YumemiWeatherError) {
+    func didFailwithError(error: YumemiWeatherError) {
         switch error {
         case .unknownError:
             showErrorAlert(message: "unknownError")
