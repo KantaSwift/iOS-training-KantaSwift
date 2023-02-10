@@ -13,10 +13,10 @@ protocol WeatherAPIClientDelegate: AnyObject {
 
 final class WeatherAPIClient {
     
-    weak var delegate: WeatherDelegate?
+    weak var delegate: WeatherAPIClientDelegate?
 
     func requestWeather() {
         let weatherString = YumemiWeather.fetchWeatherCondition()
-        delegate?.weatherDidUpdate(weather: weatherString)
+        delegate?.didUpdateWeather(weatherString)
     }
 }

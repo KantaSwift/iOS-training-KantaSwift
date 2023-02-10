@@ -81,7 +81,7 @@ private extension WeatherViewController {
         view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
-        weatherDataManager.delegate = self
+        weatherAPIClient.delegate = self
     }
     
     func setupConstraint() {
@@ -105,7 +105,7 @@ private extension WeatherViewController {
     }
     
     @objc func reloadButtonDidTap() {
-        weatherDataManager.requestWeather()
+        weatherAPIClient.requestWeather()
     }
     
     @objc func closeButtonDidTap() {
@@ -115,8 +115,8 @@ private extension WeatherViewController {
 
     // MARK: - DelegateMethods
 
-extension WeatherViewController: WeatherDelegate {
-    func weatherDidUpdate(weather: String) {
+extension WeatherViewController: WeatherAPIClientDelegate {
+    func didUpdateWeather(_ weather: String) {
         guard let weather = Weather(rawValue: weather) else { return }
         weatherImageView.image = weather.image
     }
