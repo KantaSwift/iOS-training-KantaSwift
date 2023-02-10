@@ -17,7 +17,7 @@ protocol WeatherAPIClientDelegate: AnyObject {
 final class WeatherAPIClient {
     
     private let weatherAPIRequest = WeatherAPIRequest(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
-    private let decoder  = JSONDecoder()
+    private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     weak var delegate: WeatherAPIClientDelegate?
 
