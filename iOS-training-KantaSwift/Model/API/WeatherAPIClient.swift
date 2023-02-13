@@ -19,7 +19,12 @@ enum APIClientError: Error {
     case yumemiWeatherError(YumemiWeatherError)
 }
 
-final class WeatherAPIClient {
+protocol WeatherAPIClient {
+    var delegate: WeatherAPIClientDelegate? {get set}
+    func requestWeather()
+}
+
+final class WeatherAPIClientImpl: WeatherAPIClient {
     
     private let weatherAPIRequest = WeatherAPIRequest(area: "tokyo", date: Date())
     private let encoder: JSONEncoder = {
@@ -33,6 +38,7 @@ final class WeatherAPIClient {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
+    
     weak var delegate: WeatherAPIClientDelegate?
 
     func requestWeather() {
