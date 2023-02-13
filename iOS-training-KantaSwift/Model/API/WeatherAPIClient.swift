@@ -9,7 +9,7 @@ import YumemiWeather
 
 protocol WeatherAPIClientDelegate: AnyObject {
     func didUpdateWeather(_ weather: String)
-    func didFailwithError(error: YumemiWeatherError)
+    func weatherAPIClient(didFailWithError error: YumemiWeatherError)
 }
 
 final class WeatherAPIClient {
@@ -21,7 +21,7 @@ final class WeatherAPIClient {
             let weatherString = try YumemiWeather.fetchWeatherCondition(at: "tokyo")
             delegate?.didUpdateWeather(weatherString)
         } catch let error as YumemiWeatherError {
-            delegate?.didFailwithError(error: error)
+            delegate?.weatherAPIClient(didFailWithError: error)
         } catch {}
     }
 }
