@@ -113,8 +113,8 @@ private extension WeatherViewController {
     }
 }
 
-    // MARK: - DelegateMethods
 
+// MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
     func didUpdateWeather(_ weather: String) {
         guard let weather = Weather(rawValue: weather) else { return }
