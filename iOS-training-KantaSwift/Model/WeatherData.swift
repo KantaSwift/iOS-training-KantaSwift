@@ -17,5 +17,4 @@ struct WeatherData: Decodable {
         case sunny
         case cloudy
         case rainy
-    }
 }
