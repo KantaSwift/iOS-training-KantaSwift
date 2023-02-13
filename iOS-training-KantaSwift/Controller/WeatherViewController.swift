@@ -23,6 +23,7 @@ final class WeatherViewController: UIViewController{
     private let leftLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
+        label.font = .systemFont(ofSize: 30, weight: .light)
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -31,6 +32,7 @@ final class WeatherViewController: UIViewController{
     private let rightLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.font = .systemFont(ofSize: 30, weight: .light)
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -119,9 +121,6 @@ private extension WeatherViewController {
     }
 }
 
-
-
-
 // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
     func weatherAPIClient(didFailWithError: YumemiWeatherError) {
@@ -133,9 +132,11 @@ extension WeatherViewController: WeatherAPIClientDelegate {
         }
     }
     
-    func didUpdateWeather(_ weather: String) {
-        guard let weather = Weather(rawValue: weather) else { return }
-        weatherImageView.image = weather.image
+    func didUpdateWeather(_ weather: WeatherData) {
+        guard let weatherCondition = WeatherCondition(rawValue: weather.weatherCondition) else { return }
+        weatherImageView.image = weatherCondition.image
+        leftLabel.text = String(weather.minTemperature)
+        rightLabel.text = String(weather.maxTemperature)
     }
 }
 
