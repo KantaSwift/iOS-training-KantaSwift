@@ -8,8 +8,6 @@
 import YumemiWeather
 import Foundation
 
-
-
 protocol WeatherAPIClientDelegate: AnyObject {
     func didUpdateWeather(_ weather: WeatherData)
     func weatherAPIClient(didFailWithError error: APIClientError)
