@@ -120,8 +120,17 @@ private extension WeatherViewController {
 }
 
 
-// MARK: - DelegateMethods
+    // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
+    func weatherDidFail(error: YumemiWeatherError) {
+        switch error {
+        case .unknownError:
+            showAlert(message: "unknownError")
+        case .invalidParameterError:
+            showAlert(message: "invalidParameterError")
+        }
+    }
+    
     func didUpdateWeather(_ weather: String) {
         guard let weather = Weather(rawValue: weather) else { return }
         weatherImageView.image = weather.image
