@@ -9,7 +9,13 @@ import Foundation
 
 struct WeatherData: Decodable {
     var minTemperature: Int
-    var weatherCondition: String
+    var weatherCondition: Condition
     var maxTemperature: Int
-    var date: String
+    var date: Date
+    
+    enum Condition: String, Decodable {
+        case sunny
+        case cloudy
+        case rainy
+    }
 }

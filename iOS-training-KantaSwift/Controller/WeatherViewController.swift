@@ -23,7 +23,7 @@ final class WeatherViewController: UIViewController{
     private let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
-        label.font = .systemFont(ofSize: 30, weight: .light)
+        label.font = LabelFontDifinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -32,7 +32,7 @@ final class WeatherViewController: UIViewController{
     private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
-        label.font = .systemFont(ofSize: 30, weight: .light)
+        label.font = LabelFontDifinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -127,21 +127,36 @@ extension WeatherViewController: WeatherAPIClientDelegate {
         switch didFailWithError {
         case .encodingError:
             showErrorAlert(message: "encodingError")
-        case .inValidParameterError:
-            showErrorAlert(message: "inValidParameterError")
         case .decodingError:
             showErrorAlert(message: "decodingError")
-        case .unknownError:
+        case .yumemiWeatherError(.unknownError):
             showErrorAlert(message: "unknownError")
+        case .yumemiWeatherError(.invalidParameterError):
+            showErrorAlert(message: "invalidParameterError")
         }
     }
     
     func didUpdateWeather(_ weather: WeatherData) {
-        guard let weatherCondition = WeatherCondition(rawValue: weather.weatherCondition) else { return }
-        weatherImageView.image = weatherCondition.image
+        weatherImageView.image = weather.weatherCondition.image
         minTemperatureLabel.text = String(weather.minTemperature)
         maxTemperatureLabel.text = String(weather.maxTemperature)
     }
 }
 
-
+private extension WeatherData.Condition {
+    var color: UIColor {
+        switch self {
+        case .sunny:
+            return .red
+        case .cloudy:
+            return .gray
+        case .rainy:
+            return .blue
+        }
+    }
+    
+    var image: UIImage {
+        return UIImage(named: self.rawValue)!
+            .withTintColor(color)
+    }
+}

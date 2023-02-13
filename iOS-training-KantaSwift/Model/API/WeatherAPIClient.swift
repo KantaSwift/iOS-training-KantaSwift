@@ -16,16 +16,24 @@ protocol WeatherAPIClientDelegate: AnyObject {
 
 enum APIClientError: Error {
     case decodingError
-    case inValidParameterError
     case encodingError
-    case unknownError
+    case yumemiWeatherError(YumemiWeatherError)
 }
 
 final class WeatherAPIClient {
     
-    private let weatherAPIRequest = WeatherAPIRequest(area: "tokyo", date: "2020-04-01T12:00:00+09:00")
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
+    private let weatherAPIRequest = WeatherAPIRequest(area: "tokyo", date: Date())
+    private let encoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }()
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
     weak var delegate: WeatherAPIClientDelegate?
 
     func requestWeather() {
@@ -34,11 +42,14 @@ final class WeatherAPIClient {
             guard let parameter = String(data: data, encoding: .utf8) else { return }
             let jsonString = try YumemiWeather.fetchWeather(parameter)
             guard let data = jsonString.data(using: .utf8) else { return }
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let weather = try decoder.decode(WeatherData.self, from: data)
             delegate?.didUpdateWeather(weather)
-        } catch let error as APIClientError {
-            delegate?.weatherAPIClient(didFailWithError: error)
+        } catch let error as YumemiWeatherError {
+            delegate?.weatherAPIClient(didFailWithError: .yumemiWeatherError(error))
+        } catch _ as DecodingError {
+            delegate?.weatherAPIClient(didFailWithError: .decodingError)
+        } catch _ as EncodingError {
+            delegate?.weatherAPIClient(didFailWithError: .encodingError)
         } catch {}
     }
 }

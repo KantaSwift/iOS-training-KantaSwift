@@ -9,5 +9,5 @@ import Foundation
 
 struct WeatherAPIRequest: Encodable {
     let area: String
-    let date: String
+    let date: Date
 }
