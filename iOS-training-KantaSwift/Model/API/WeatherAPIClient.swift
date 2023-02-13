@@ -11,7 +11,14 @@ import Foundation
 
 protocol WeatherAPIClientDelegate: AnyObject {
     func didUpdateWeather(_ weather: WeatherData)
-    func weatherAPIClient(didFailWithError error: YumemiWeatherError)
+    func weatherAPIClient(didFailWithError error: APIClientError)
+}
+
+enum APIClientError: Error {
+    case decodingError
+    case inValidParameterError
+    case encodingError
+    case unknownError
 }
 
 final class WeatherAPIClient {
@@ -29,7 +36,7 @@ final class WeatherAPIClient {
             guard let data = jsonString.data(using: .utf8) else { return }
             let weather = try decoder.decode(WeatherData.self, from: data)
             delegate?.didUpdateWeather(weather)
-        } catch let error as YumemiWeatherError {
+        } catch let error as APIClientError {
             delegate?.weatherAPIClient(didFailWithError: error)
         } catch {}
     }

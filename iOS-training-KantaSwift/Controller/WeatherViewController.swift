@@ -123,12 +123,16 @@ private extension WeatherViewController {
 
 // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
-    func weatherAPIClient(didFailWithError: YumemiWeatherError) {
+    func weatherAPIClient(didFailWithError: APIClientError) {
         switch didFailWithError {
+        case .encodingError:
+            showErrorAlert(message: "encodingError")
+        case .inValidParameterError:
+            showErrorAlert(message: "inValidParameterError")
+        case .decodingError:
+            showErrorAlert(message: "decodingError")
         case .unknownError:
             showErrorAlert(message: "unknownError")
-        case .invalidParameterError:
-            showErrorAlert(message: "invalidParameterError")
         }
     }
     
