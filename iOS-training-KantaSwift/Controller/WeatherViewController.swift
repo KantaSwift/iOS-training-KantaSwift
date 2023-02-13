@@ -20,17 +20,19 @@ final class WeatherViewController: UIViewController{
         return imageView
     }()
     
-    private let leftLabel: UILabel = {
+    private let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
+        label.font = LabelFontDifinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
     }()
     
-    private let rightLabel: UILabel = {
+    private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.font = LabelFontDifinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -50,7 +52,7 @@ final class WeatherViewController: UIViewController{
     
     // MARK: - UIStackViews
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [leftLabel, rightLabel])
+        let stackView = UIStackView(arrangedSubviews: [minTemperatureLabel, maxTemperatureLabel])
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
         return stackView
@@ -119,22 +121,42 @@ private extension WeatherViewController {
     }
 }
 
-
 // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
-    func weatherAPIClient(didFailWithError: YumemiWeatherError) {
+    func weatherAPIClient(didFailWithError: APIClientError) {
         switch didFailWithError {
-        case .unknownError:
+        case .encodingError:
+            showErrorAlert(message: "encodingError")
+        case .decodingError:
+            showErrorAlert(message: "decodingError")
+        case .yumemiWeatherError(.unknownError):
             showErrorAlert(message: "unknownError")
-        case .invalidParameterError:
+        case .yumemiWeatherError(.invalidParameterError):
             showErrorAlert(message: "invalidParameterError")
         }
     }
     
-    func didUpdateWeather(_ weather: String) {
-        guard let weather = Weather(rawValue: weather) else { return }
-        weatherImageView.image = weather.image
+    func didUpdateWeather(_ weather: WeatherData) {
+        weatherImageView.image = weather.weatherCondition.image
+        minTemperatureLabel.text = String(weather.minTemperature)
+        maxTemperatureLabel.text = String(weather.maxTemperature)
     }
 }
 
-
+private extension WeatherData.Condition {
+    var color: UIColor {
+        switch self {
+        case .sunny:
+            return .red
+        case .cloudy:
+            return .gray
+        case .rainy:
+            return .blue
+        }
+    }
+    
+    var image: UIImage {
+        return UIImage(named: self.rawValue)!
+            .withTintColor(color)
+    }
+}

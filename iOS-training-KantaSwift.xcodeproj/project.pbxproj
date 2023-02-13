@@ -17,10 +17,12 @@
 		2377FD84298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */; };
 		2377FD92298B587400499B5E /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD91298B587400499B5E /* YumemiWeather */; };
 		2377FD95298B5CC400499B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2377FD94298B5CC400499B5E /* SnapKit */; };
-		2377FDA3298CA07200499B5E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA2298CA07200499B5E /* Weather.swift */; };
 		2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDA4298CA63E00499B5E /* InitialViewController.swift */; };
 		2377FDAF299096D200499B5E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2377FDAE299096D200499B5E /* CustomButton.swift */; };
 		239E54042990EE0A00408BF7 /* WeatherAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */; };
+		239E540729923AFD00408BF7 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E540629923AFD00408BF7 /* WeatherData.swift */; };
+		239E540B29938AE400408BF7 /* WeatherAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E540A29938AE400408BF7 /* WeatherAPIRequest.swift */; };
+		23B556D32996389A0046920B /* LabelFontDifinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B556D22996389A0046920B /* LabelFontDifinition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +55,12 @@
 		2377FD7D298B528800499B5E /* iOS-training-KantaSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-training-KantaSwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2377FD81298B528800499B5E /* iOS_training_KantaSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITests.swift; sourceTree = "<group>"; };
 		2377FD83298B528800499B5E /* iOS_training_KantaSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_training_KantaSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2377FDA2298CA07200499B5E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2377FDA4298CA63E00499B5E /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		2377FDAE299096D200499B5E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIClient.swift; sourceTree = "<group>"; };
+		239E540629923AFD00408BF7 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		239E540A29938AE400408BF7 /* WeatherAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIRequest.swift; sourceTree = "<group>"; };
+		23B556D22996389A0046920B /* LabelFontDifinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFontDifinition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +154,7 @@
 		2377FDA1298CA05000499B5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2377FDA2298CA07200499B5E /* Weather.swift */,
+				239E540629923AFD00408BF7 /* WeatherData.swift */,
 				239E54052990F9C700408BF7 /* API */,
 			);
 			path = Model;
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				2377FDAE299096D200499B5E /* CustomButton.swift */,
+				23B556D22996389A0046920B /* LabelFontDifinition.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */,
+				239E540A29938AE400408BF7 /* WeatherAPIRequest.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -311,12 +317,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2377FDA5298CA63E00499B5E /* InitialViewController.swift in Sources */,
+				23B556D32996389A0046920B /* LabelFontDifinition.swift in Sources */,
 				239E54042990EE0A00408BF7 /* WeatherAPIClient.swift in Sources */,
-				2377FDA3298CA07200499B5E /* Weather.swift in Sources */,
 				2377FDAF299096D200499B5E /* CustomButton.swift in Sources */,
 				2377FD65298B528700499B5E /* WeatherViewController.swift in Sources */,
 				2377FD61298B528700499B5E /* AppDelegate.swift in Sources */,
+				239E540729923AFD00408BF7 /* WeatherData.swift in Sources */,
 				2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */,
+				239E540B29938AE400408BF7 /* WeatherAPIRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

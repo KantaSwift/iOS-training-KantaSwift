@@ -6,22 +6,50 @@
 //
 
 import YumemiWeather
+import Foundation
+
 
 protocol WeatherAPIClientDelegate: AnyObject {
-    func didUpdateWeather(_ weather: String)
-    func weatherAPIClient(didFailWithError error: YumemiWeatherError)
+    func didUpdateWeather(_ weather: WeatherData)
+    func weatherAPIClient(didFailWithError error: APIClientError)
+}
+
+enum APIClientError: Error {
+    case decodingError
+    case encodingError
+    case yumemiWeatherError(YumemiWeatherError)
 }
 
 final class WeatherAPIClient {
     
+    private let weatherAPIRequest = WeatherAPIRequest(area: "tokyo", date: Date())
+    private let encoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }()
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
     weak var delegate: WeatherAPIClientDelegate?
 
     func requestWeather() {
         do {
-            let weatherString = try YumemiWeather.fetchWeatherCondition(at: "tokyo")
-            delegate?.didUpdateWeather(weatherString)
+            let data  = try encoder.encode(weatherAPIRequest)
+            guard let parameter = String(data: data, encoding: .utf8) else { return }
+            let jsonString = try YumemiWeather.fetchWeather(parameter)
+            guard let data = jsonString.data(using: .utf8) else { return }
+            let weather = try decoder.decode(WeatherData.self, from: data)
+            delegate?.didUpdateWeather(weather)
         } catch let error as YumemiWeatherError {
-            delegate?.weatherAPIClient(didFailWithError: error)
+            delegate?.weatherAPIClient(didFailWithError: .yumemiWeatherError(error))
+        } catch _ as DecodingError {
+            delegate?.weatherAPIClient(didFailWithError: .decodingError)
+        } catch _ as EncodingError {
+            delegate?.weatherAPIClient(didFailWithError: .encodingError)
         } catch {}
     }
 }
