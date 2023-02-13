@@ -114,6 +114,7 @@ private extension WeatherViewController {
     @objc func closeButtonDidTap() {
         dismiss(animated: true)
     }
+<<<<<<< HEAD
     
     func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
@@ -163,5 +164,4 @@ private extension WeatherData.Condition {
     var image: UIImage {
         return UIImage(named: self.rawValue)!
             .withTintColor(color)
-    }
 }
