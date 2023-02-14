@@ -8,6 +8,7 @@
 import YumemiWeather
 import Foundation
 
+
 protocol WeatherAPIClientDelegate: AnyObject {
     func didUpdateWeather(_ weather: WeatherData)
     func weatherAPIClient(didFailWithError error: APIClientError)
@@ -38,7 +39,6 @@ final class WeatherAPIClientImpl: WeatherAPIClient {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    
     weak var delegate: WeatherAPIClientDelegate?
 
     func requestWeather() {
