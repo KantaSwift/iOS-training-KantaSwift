@@ -23,13 +23,13 @@ final class WeatherViewController: UIViewController{
     }
     
     // MARK: - UI
-    private let weatherImageView: UIImageView = {
+   let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemBackground
         return imageView
     }()
     
-    private let minTemperatureLabel: UILabel = {
+    let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
         label.font = LabelFontDefinition.middleSize
@@ -38,7 +38,7 @@ final class WeatherViewController: UIViewController{
         return label
     }()
     
-    private let maxTemperatureLabel: UILabel = {
+    let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
         label.font = LabelFontDefinition.middleSize

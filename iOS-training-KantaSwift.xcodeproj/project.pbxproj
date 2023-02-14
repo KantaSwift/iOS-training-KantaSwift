@@ -22,7 +22,6 @@
 		239E54042990EE0A00408BF7 /* WeatherAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */; };
 		239E540729923AFD00408BF7 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E540629923AFD00408BF7 /* WeatherData.swift */; };
 		239E540B29938AE400408BF7 /* WeatherAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E540A29938AE400408BF7 /* WeatherAPIRequest.swift */; };
-		23B556D12994F86E0046920B /* WeatherModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B556D02994F86E0046920B /* WeatherModelMock.swift */; };
 		23B556D5299A2B570046920B /* LabelDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B556D4299A2B570046920B /* LabelDefinition.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +60,6 @@
 		239E54032990EE0A00408BF7 /* WeatherAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIClient.swift; sourceTree = "<group>"; };
 		239E540629923AFD00408BF7 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		239E540A29938AE400408BF7 /* WeatherAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIRequest.swift; sourceTree = "<group>"; };
-		23B556D02994F86E0046920B /* WeatherModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelMock.swift; sourceTree = "<group>"; };
 		23B556D4299A2B570046920B /* LabelDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDefinition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				239E540629923AFD00408BF7 /* WeatherData.swift */,
-				23B556D02994F86E0046920B /* WeatherModelMock.swift */,
 				239E54052990F9C700408BF7 /* API */,
 			);
 			path = Model;
@@ -324,7 +321,6 @@
 				2377FDAF299096D200499B5E /* CustomButton.swift in Sources */,
 				2377FD65298B528700499B5E /* WeatherViewController.swift in Sources */,
 				2377FD61298B528700499B5E /* AppDelegate.swift in Sources */,
-				23B556D12994F86E0046920B /* WeatherModelMock.swift in Sources */,
 				239E540729923AFD00408BF7 /* WeatherData.swift in Sources */,
 				23B556D5299A2B570046920B /* LabelDefinition.swift in Sources */,
 				2377FD63298B528700499B5E /* SceneDelegate.swift in Sources */,
