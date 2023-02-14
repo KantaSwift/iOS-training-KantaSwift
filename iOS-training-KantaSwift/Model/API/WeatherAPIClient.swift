@@ -8,11 +8,6 @@
 import YumemiWeather
 import Foundation
 
-protocol WeatherAPIClientDelegate: AnyObject {
-    func didUpdateWeather(_ weather: WeatherData)
-    func weatherAPIClient(didFailWithError error: APIClientError)
-}
-
 enum APIClientError: Error {
     case decodingError
     case encodingError
@@ -20,8 +15,7 @@ enum APIClientError: Error {
 }
 
 protocol WeatherAPIClient {
-    var delegate: WeatherAPIClientDelegate? { get set }
-    func requestWeather()
+    func requestWeather(completion: @escaping (Result<WeatherData, APIClientError>) -> ())
 }
 
 final class WeatherAPIClientImpl: WeatherAPIClient {
@@ -38,22 +32,23 @@ final class WeatherAPIClientImpl: WeatherAPIClient {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    weak var delegate: WeatherAPIClientDelegate?
 
-    func requestWeather() {
+    func requestWeather(completion: @escaping (Result<WeatherData, APIClientError>) -> ()) {
         do {
             let data  = try encoder.encode(weatherAPIRequest)
-            guard let parameter = String(data: data, encoding: .utf8) else { return }
+            guard let parameter = String(data: data, encoding: .utf8) else {
+                completion(.failure(.encodingError))
+                return
+            }
             let jsonString = try YumemiWeather.syncFetchWeather(parameter)
-            guard let data = jsonString.data(using: .utf8) else { return }
+            guard let data = jsonString.data(using: .utf8) else {
+                completion(.failure(.decodingError))
+                return
+            }
             let weather = try decoder.decode(WeatherData.self, from: data)
-            delegate?.didUpdateWeather(weather)
+            completion(.success(weather))
         } catch let error as YumemiWeatherError {
-            delegate?.weatherAPIClient(didFailWithError: .yumemiWeatherError(error))
-        } catch _ as DecodingError {
-            delegate?.weatherAPIClient(didFailWithError: .decodingError)
-        } catch _ as EncodingError {
-            delegate?.weatherAPIClient(didFailWithError: .encodingError)
+            completion(.failure(.yumemiWeatherError(error)))
         } catch {}
     }
 }
