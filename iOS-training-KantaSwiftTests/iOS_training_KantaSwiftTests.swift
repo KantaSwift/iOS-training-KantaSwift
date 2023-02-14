@@ -27,21 +27,11 @@ final class WeatherModelMock: WeatherAPIClient {
 
 final class iOS_training_KantaSwiftTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-//    天気予報がsunnyだったら、画面に晴れ画像が表示されること
-//    天気予報がcloudyだったら、画面に曇り画像が表示されること
-//    天気予報がrainyだったら、画面に雨画像が表示されること
-//    天気予報の最高気温がUILabelに反映されること
-//    天気予報の最低気温がUILabelに反映されること
-    
     func test_天気予報がsunnyだったら画面に晴れ画像が表示されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .sunny, maxTemperature: 30, date: Date()))
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
         weatherModelMock.requestWeather()
-        
         XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "sunny")?.withTintColor(.red))
     }
     
@@ -50,7 +40,6 @@ final class iOS_training_KantaSwiftTests: XCTestCase {
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
         weatherModelMock.requestWeather()
-        
         XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "cloudy")?.withTintColor(.gray))
     }
 
@@ -62,38 +51,19 @@ final class iOS_training_KantaSwiftTests: XCTestCase {
         XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "rainy")?.withTintColor(.blue))
     }
 
-    func test_天気予報の最高気温がUILabelに反映されること() {
-        let test_minTemperatureLabel: UILabel = {
-            let label = UILabel()
-            label.textColor = .blue
-            label.font = LabelFontDefinition.middleSize
-            label.text = "20"
-            label.textAlignment = .center
-            return label
-        }()
+    func test_天気予報の最低気温がUILabelに反映されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
         weatherModelMock.requestWeather()
-        
-        XCTAssertEqual(weatherVC.minTemperatureLabel.text, test_minTemperatureLabel.text)
+        XCTAssertEqual(weatherVC.minTemperatureLabel.text, "20")
     }
 
-    func test_天気予報の最低気温がUILabelに反映されること() {
-        let test_maxTemperatureLabel: UILabel = {
-            let label = UILabel()
-            label.textColor = .red
-            label.font = LabelFontDefinition.middleSize
-            label.text = "30"
-            label.textAlignment = .center
-            return label
-        }()
+    func test_天気予報の最高気温がUILabelに反映されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
         weatherModelMock.requestWeather()
-        
-        XCTAssertEqual(weatherVC.maxTemperatureLabel.text, test_maxTemperatureLabel.text)
+        XCTAssertEqual(weatherVC.maxTemperatureLabel.text, "30")
     }
-    
 }

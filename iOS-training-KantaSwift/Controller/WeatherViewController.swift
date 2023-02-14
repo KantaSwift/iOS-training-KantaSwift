@@ -100,7 +100,6 @@ private extension WeatherViewController {
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
         labelStackView.addSubview(activityIndicatorView)
-        weatherAPIClient.delegate = self
     }
     
     func setupConstraint() {
@@ -129,8 +128,15 @@ private extension WeatherViewController {
     
     @objc func reloadButtonDidTap() {
         self.activityIndicatorView.startAnimating()
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.weatherAPIClient.requestWeather()
+        DispatchQueue.global(qos: .userInitiated).async {[weak self] in
+            self?.weatherAPIClient.requestWeather { result in
+                switch result {
+                case .success(let weatherData):
+                    self?.updateUI(weatherData)
+                case .failure(let error):
+                    self?.showError(error)
+                }
+            }
         }
     }
     
@@ -144,17 +150,16 @@ private extension WeatherViewController {
         present(alert, animated: true)
     }
     
-    @objc func  didBecomeActive() {
-        activityIndicatorView.startAnimating()
-        DispatchQueue.global(qos: .userInitiated).async {[weak self] in
-            self?.weatherAPIClient.requestWeather()
+    func updateUI(_ weather: WeatherData) {
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicatorView.stopAnimating()
+            self?.weatherImageView.image = weather.weatherCondition.image
+            self?.minTemperatureLabel.text = String(weather.minTemperature)
+            self?.maxTemperatureLabel.text = String(weather.maxTemperature)
         }
     }
-}
-
-// MARK: - DelegateMethods
-extension WeatherViewController: WeatherAPIClientDelegate {
-    func weatherAPIClient(didFailWithError: APIClientError) {
+    
+    func showError(_ didFailWithError: APIClientError) {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicatorView.stopAnimating()
             switch didFailWithError {
@@ -170,12 +175,17 @@ extension WeatherViewController: WeatherAPIClientDelegate {
         }
     }
     
-    func didUpdateWeather(_ weather: WeatherData) {
-        DispatchQueue.main.async { [weak self] in
-            self?.activityIndicatorView.stopAnimating()
-            self?.weatherImageView.image = weather.weatherCondition.image
-            self?.minTemperatureLabel.text = String(weather.minTemperature)
-            self?.maxTemperatureLabel.text = String(weather.maxTemperature)
+    @objc func  didBecomeActive() {
+        activityIndicatorView.startAnimating()
+        DispatchQueue.global(qos: .userInitiated).async {[weak self] in
+            self?.weatherAPIClient.requestWeather { result in
+                switch result {
+                case .success(let weatherData):
+                    self?.updateUI(weatherData)
+                case .failure(let error):
+                    self?.showError(error)
+                }
+            }
         }
     }
 }
