@@ -23,7 +23,13 @@ final class WeatherViewController: UIViewController{
     }
     
     // MARK: - UI
-   let weatherImageView: UIImageView = {
+    
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        return indicator
+    }()
+    
+    let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemBackground
         return imageView
@@ -93,6 +99,7 @@ private extension WeatherViewController {
         view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
+        labelStackView.addSubview(activityIndicatorView)
         weatherAPIClient.delegate = self
     }
     
@@ -114,10 +121,17 @@ private extension WeatherViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(weatherImageView.snp.width)
         }
+        
+        activityIndicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     @objc func reloadButtonDidTap() {
-        weatherAPIClient.requestWeather()
+        self.activityIndicatorView.startAnimating()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.weatherAPIClient.requestWeather()
+        }
     }
     
     @objc func closeButtonDidTap() {
@@ -129,31 +143,40 @@ private extension WeatherViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-
+    
     @objc func  didBecomeActive() {
-        weatherAPIClient.requestWeather()
+        activityIndicatorView.startAnimating()
+        DispatchQueue.global(qos: .userInitiated).async {[weak self] in
+            self?.weatherAPIClient.requestWeather()
+        }
     }
 }
 
 // MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
     func weatherAPIClient(didFailWithError: APIClientError) {
-        switch didFailWithError {
-        case .encodingError:
-            showErrorAlert(message: "encodingError")
-        case .decodingError:
-            showErrorAlert(message: "decodingError")
-        case .yumemiWeatherError(.unknownError):
-            showErrorAlert(message: "unknownError")
-        case .yumemiWeatherError(.invalidParameterError):
-            showErrorAlert(message: "invalidParameterError")
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicatorView.stopAnimating()
+            switch didFailWithError {
+            case .encodingError:
+                self?.showErrorAlert(message: "encodingError")
+            case .decodingError:
+                self?.showErrorAlert(message: "decodingError")
+            case .yumemiWeatherError(.unknownError):
+                self?.showErrorAlert(message: "unknownError")
+            case .yumemiWeatherError(.invalidParameterError):
+                self?.showErrorAlert(message: "invalidParameterError")
+            }
         }
     }
     
     func didUpdateWeather(_ weather: WeatherData) {
-        weatherImageView.image = weather.weatherCondition.image
-        minTemperatureLabel.text = String(weather.minTemperature)
-        maxTemperatureLabel.text = String(weather.maxTemperature)
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicatorView.stopAnimating()
+            self?.weatherImageView.image = weather.weatherCondition.image
+            self?.minTemperatureLabel.text = String(weather.minTemperature)
+            self?.maxTemperatureLabel.text = String(weather.maxTemperature)
+        }
     }
 }
 
