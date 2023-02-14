@@ -111,13 +111,30 @@ private extension WeatherViewController {
     @objc func closeButtonDidTap() {
         dismiss(animated: true)
     }
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "エラー", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
-    // MARK: - DelegateMethods
 
+// MARK: - DelegateMethods
 extension WeatherViewController: WeatherAPIClientDelegate {
+    func weatherAPIClient(didFailWithError: YumemiWeatherError) {
+        switch didFailWithError {
+        case .unknownError:
+            showErrorAlert(message: "unknownError")
+        case .invalidParameterError:
+            showErrorAlert(message: "invalidParameterError")
+        }
+    }
+    
     func didUpdateWeather(_ weather: String) {
         guard let weather = Weather(rawValue: weather) else { return }
         weatherImageView.image = weather.image
     }
 }
+
+
