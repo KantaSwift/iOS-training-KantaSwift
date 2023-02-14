@@ -20,7 +20,7 @@ enum APIClientError: Error {
 }
 
 protocol WeatherAPIClient {
-    var delegate: WeatherAPIClientDelegate? {get set}
+    var delegate: WeatherAPIClientDelegate? { get set }
     func requestWeather()
 }
 
