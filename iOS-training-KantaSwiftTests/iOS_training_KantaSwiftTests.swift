@@ -8,29 +8,62 @@
 import XCTest
 @testable import iOS_training_KantaSwift
 
+final class WeatherModelMock: WeatherAPIClient {
+    
+    var delegate: WeatherAPIClientDelegate?
+    private let weatherData: WeatherData
+   
+    
+    init(delegate: WeatherAPIClientDelegate? = nil, weatherData: WeatherData) {
+        self.delegate = delegate
+        self.weatherData = weatherData
+    }
+    
+    func requestWeather() {
+        delegate?.didUpdateWeather(weatherData)
+    }
+}
+
+
 final class iOS_training_KantaSwiftTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_天気予報がsunnyだったら画面に晴れ画像が表示されること() {
+        let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .sunny, maxTemperature: 30, date: Date()))
+        let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
+        weatherModelMock.delegate = weatherVC
+        weatherModelMock.requestWeather()
+        XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "sunny")?.withTintColor(.red))
+    }
+    
+    func test_天気予報がcloudyだったら画面に曇り画像が表示されること() {
+        let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .cloudy, maxTemperature: 30, date: Date()))
+        let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
+        weatherModelMock.delegate = weatherVC
+        weatherModelMock.requestWeather()
+        XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "cloudy")?.withTintColor(.gray))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_天気予報がrainyだったら画面に雨画像が表示されること() {
+        let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
+        let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
+        weatherModelMock.delegate = weatherVC
+        weatherModelMock.requestWeather()
+        XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "rainy")?.withTintColor(.blue))
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func test_天気予報の最低気温がUILabelに反映されること() {
+        let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
+        let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
+        weatherModelMock.delegate = weatherVC
+        weatherModelMock.requestWeather()
+        XCTAssertEqual(weatherVC.minTemperatureLabel.text, "20")
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_天気予報の最高気温がUILabelに反映されること() {
+        let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
+        let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
+        weatherModelMock.delegate = weatherVC
+        weatherModelMock.requestWeather()
+        XCTAssertEqual(weatherVC.maxTemperatureLabel.text, "30")
     }
-
 }

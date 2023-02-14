@@ -21,7 +21,7 @@ final class InitialViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print(#function)
-        let nextVC = WeatherViewController()
+        let nextVC = WeatherViewController(weatherAPIClient: WeatherAPIClientImpl())
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
     }

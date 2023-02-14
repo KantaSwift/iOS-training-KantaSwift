@@ -11,28 +11,37 @@ import YumemiWeather
 
 final class WeatherViewController: UIViewController{
     
-    private let weatherAPIClient = WeatherAPIClient()
+    private var weatherAPIClient: WeatherAPIClient
+    
+    init(weatherAPIClient: WeatherAPIClient) {
+        self.weatherAPIClient = weatherAPIClient
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - UI
-    private let weatherImageView: UIImageView = {
+   let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemBackground
         return imageView
     }()
     
-    private let minTemperatureLabel: UILabel = {
+    let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue
-        label.font = LabelFontDifinition.middleSize
+        label.font = LabelFontDefinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
     }()
     
-    private let maxTemperatureLabel: UILabel = {
+    let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
-        label.font = LabelFontDifinition.middleSize
+        label.font = LabelFontDefinition.middleSize
         label.text = "--"
         label.textAlignment = .center
         return label
@@ -120,7 +129,7 @@ private extension WeatherViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
+
     @objc func  didBecomeActive() {
         weatherAPIClient.requestWeather()
     }
