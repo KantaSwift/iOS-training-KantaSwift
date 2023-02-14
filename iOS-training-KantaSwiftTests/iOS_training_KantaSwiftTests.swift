@@ -30,11 +30,6 @@ final class iOS_training_KantaSwiftTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-//    天気予報がsunnyだったら、画面に晴れ画像が表示されること
-//    天気予報がcloudyだったら、画面に曇り画像が表示されること
-//    天気予報がrainyだったら、画面に雨画像が表示されること
-//    天気予報の最高気温がUILabelに反映されること
-//    天気予報の最低気温がUILabelに反映されること
     
     func test_天気予報がsunnyだったら画面に晴れ画像が表示されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .sunny, maxTemperature: 30, date: Date()))
@@ -62,7 +57,7 @@ final class iOS_training_KantaSwiftTests: XCTestCase {
         XCTAssertEqual(weatherVC.weatherImageView.image, UIImage(named: "rainy")?.withTintColor(.blue))
     }
 
-    func test_天気予報の最高気温がUILabelに反映されること() {
+    func test_天気予報の最低気温がUILabelに反映されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
@@ -71,7 +66,7 @@ final class iOS_training_KantaSwiftTests: XCTestCase {
         XCTAssertEqual(weatherVC.minTemperatureLabel.text, "20")
     }
 
-    func test_天気予報の最低気温がUILabelに反映されること() {
+    func test_天気予報の最高気温がUILabelに反映されること() {
         let weatherModelMock = WeatherModelMock(weatherData: WeatherData(minTemperature: 20, weatherCondition: .rainy, maxTemperature: 30, date: Date()))
         let weatherVC = WeatherViewController(weatherAPIClient: weatherModelMock)
         weatherModelMock.delegate = weatherVC
