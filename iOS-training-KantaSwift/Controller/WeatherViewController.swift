@@ -11,6 +11,8 @@ import YumemiWeather
 
 final class WeatherViewController: UIViewController{
     
+    private let weatherAPIClient = WeatherAPIClient()
+    
     // MARK: - UI
     private let weatherImageView: UIImageView = {
         let imageView = UIImageView()
@@ -35,13 +37,13 @@ final class WeatherViewController: UIViewController{
     }()
     
     private lazy var reloadButton: CustomButton = {
-        let button = CustomButton(title: "reload")
-        button.addTarget(self, action: #selector(getWeatherData), for: .touchUpInside)
+        let button = CustomButton(title: "Reload", frame: .zero)
+        button.addTarget(self, action: #selector(reloadButtonDidTap), for: .touchUpInside)
         return button
     }()
     
     private lazy var closeButton: CustomButton = {
-        let button = CustomButton(title: "close")
+        let button = CustomButton(title: "Close", frame: .zero)
         button.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -68,6 +70,10 @@ final class WeatherViewController: UIViewController{
         setupView()
         setupConstraint()
     }
+    
+    deinit {
+        print("delegate deinit")
+    }
 }
 
 private extension WeatherViewController {
@@ -75,6 +81,7 @@ private extension WeatherViewController {
         view.addSubview(weatherImageView)
         view.addSubview(labelStackView)
         view.addSubview(buttonStackView)
+        weatherAPIClient.delegate = self
     }
     
     func setupConstraint() {
@@ -97,13 +104,20 @@ private extension WeatherViewController {
         }
     }
     
-    @objc func getWeatherData() {
-        let weatherString = YumemiWeather.fetchWeatherCondition()
-        guard let weather = Weather(rawValue: weatherString) else { return }
-        weatherImageView.image = weather.image
+    @objc func reloadButtonDidTap() {
+        weatherAPIClient.requestWeather()
     }
     
     @objc func closeButtonDidTap() {
         dismiss(animated: true)
+    }
+}
+
+    // MARK: - DelegateMethods
+
+extension WeatherViewController: WeatherAPIClientDelegate {
+    func didUpdateWeather(_ weather: String) {
+        guard let weather = Weather(rawValue: weather) else { return }
+        weatherImageView.image = weather.image
     }
 }
